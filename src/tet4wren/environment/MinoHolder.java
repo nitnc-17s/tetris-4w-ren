@@ -1,4 +1,4 @@
-package environment.mino;
+package tet4wren.environment;
 
 import java.util.Arrays;
 
@@ -27,6 +27,14 @@ public class MinoHolder {
         return ret;
     }
 
+    public Mino getHoldMino() {
+        return minoBuffer[0];
+    }
+
+    public Mino getCurrentMino() {
+        return minoBuffer[1];
+    }
+
     public Mino[] getNextMinos() {
         return Arrays.copyOfRange(minoBuffer, 2, minoBuffer.length);
     }
@@ -34,10 +42,21 @@ public class MinoHolder {
     @Override
     public String toString() {
         return "MinoHolder{" +
-                "Hold=" + minoBuffer[0] +
-                ", Current=" + minoBuffer[1] +
+                "Hold=" + getHoldMino() +
+                ", Current=" + getCurrentMino() +
                 ", Next=" + Arrays.toString(getNextMinos()) +
                 ", minoGenerator=" + minoGenerator +
                 '}';
     }
+
+    public int toInt() {
+        int index = 0;
+        int base = 1;
+        for (Mino mino : minoBuffer) {
+            index += base * mino.number();
+            base *= mino.size();
+        }
+        return index;
+    }
+
 }

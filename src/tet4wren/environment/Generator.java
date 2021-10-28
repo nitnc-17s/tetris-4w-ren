@@ -1,4 +1,4 @@
-package environment.mino;
+package tet4wren.environment;
 
 public abstract class Generator {
     /**

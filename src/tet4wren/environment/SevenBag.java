@@ -1,6 +1,5 @@
-package environment.mino;
+package tet4wren.environment;
 
-import java.util.Arrays;
 import java.util.Random;
 
 public class SevenBag extends Generator {

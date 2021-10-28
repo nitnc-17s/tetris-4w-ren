@@ -1,6 +1,6 @@
 package tet4wren.environment;
 
 public interface Mino {
-    int number();
+    int getId();
     int size();
 }

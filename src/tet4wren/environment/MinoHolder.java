@@ -53,7 +53,7 @@ public class MinoHolder {
         int index = 0;
         int base = 1;
         for (Mino mino : minoBuffer) {
-            index += base * mino.number();
+            index += base * mino.getId();
             base *= mino.size();
         }
         return index;

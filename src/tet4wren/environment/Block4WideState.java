@@ -34,7 +34,7 @@ public enum Block4WideState {
     ;
 
     private final int id;
-    private Block4WideState(int id) {
+    Block4WideState(int id) {
         this.id = id;
     }
     public int getId() {

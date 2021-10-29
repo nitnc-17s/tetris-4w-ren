@@ -16,5 +16,14 @@ public class EnvironmentTest {
                 tetriminos.clear();
             }
         }
+        testMinoHolder();
+    }
+    public static void testMinoHolder() {
+        MinoHolder minoHolder = new MinoHolder(7, new SevenBag(0));
+        for ( int i = 0; i < 100; i++ ) {
+            System.out.print(minoHolder);
+            Mino consume = minoHolder.consume(i%5!=1);
+            System.out.println(" => Use: " + consume);
+        }
     }
 }

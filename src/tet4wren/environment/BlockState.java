@@ -1,36 +1,36 @@
 package tet4wren.environment;
 
 public enum BlockState {
-    // see comment's octal as binary
-    B0 (0) , // un-chainable Blocks
-    B1 (1) , // 0007
-    B2 (2) , // 0013
-    B3 (3) , // 0023
-    B4 (4) , // 0031
-    B5 (5) , // 0032
-    B6 (6) , // 0103
-    B7 (7) , // 0111
-    B8 (8) , // 0112
-    B9 (9) , // 0221
-    B10(10), // 1002
-    B11(11), // 1011
-    B12(12), // 2011
-    B13(13), // 1021
-    B14(14), // 1012
-    B15(15), // 1101
-    B16(16), // 1102
-    B17(17), // 1201
-    B18(18), // 2101
-    B19(19), // 1110
-    B20(20), // 1220
-    B21(21), // 2110
-    B22(22), // 1300
-    B23(23), // 2300
-    B24(24), // 3001
-    B25(25), // 3010
-    B26(26), // 3100
-    B27(27), // 3200
-    B28(28), // 7000
+    // see octal as binary
+    B0 (0 , 07777), // un-chainable Blocks
+    B1 (1 , 00007),
+    B2 (2 , 00013),
+    B3 (3 , 00023),
+    B4 (4 , 00031),
+    B5 (5 , 00032),
+    B6 (6 , 00103),
+    B7 (7 , 00111),
+    B8 (8 , 00112),
+    B9 (9 , 00221),
+    B10(10, 01003),
+    B11(11, 01011),
+    B12(12, 02011),
+    B13(13, 01021),
+    B14(14, 01012),
+    B15(15, 01101),
+    B16(16, 01102),
+    B17(17, 01201),
+    B18(18, 02101),
+    B19(19, 01110),
+    B20(20, 01220),
+    B21(21, 02110),
+    B22(22, 01300),
+    B23(23, 02300),
+    B24(24, 03001),
+    B25(25, 03010),
+    B26(26, 03100),
+    B27(27, 03200),
+    B28(28, 07000),
     ;
 
     private static final BlockState[][] blockStateTransition = new BlockState[][] {
@@ -66,8 +66,10 @@ public enum BlockState {
     };
 
     private final int id;
-    BlockState(int id) {
+    private final int block;
+    BlockState(int id, int block) {
         this.id = id;
+        this.block = block;
     }
 
     public int getId() {
@@ -78,6 +80,16 @@ public enum BlockState {
         int state = this.getId();
         int place = placement.getId();
         return blockStateTransition[state][place];
+    }
+
+    public String toBlockAscii() {
+        StringBuilder ret = new StringBuilder();
+        for (int i = 0; i < 12; i++) {
+            int index = 11 - (i % 4) * 3 - i / 4;
+            ret.append(((block >> index) & 1) == 1 ? "#" : ".");
+            if (i%4 == 3) ret.append("\n");
+        }
+        return ret.toString();
     }
 
 }

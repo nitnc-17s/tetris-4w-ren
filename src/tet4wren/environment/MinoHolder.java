@@ -49,12 +49,15 @@ public class MinoHolder {
                 '}';
     }
 
-    public int toInt() {
+    public int toInt() throws Exception {
         int index = 0;
         int base = 1;
         for (Mino mino : minoBuffer) {
+            if (!(mino instanceof Tetrimino)) {
+                throw new Exception("Not Tetrimino is Containing");
+            }
             index += base * mino.getId();
-            base *= mino.size();
+            base *= Tetrimino.size();
         }
         return index;
     }

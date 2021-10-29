@@ -13,8 +13,7 @@ public enum Tetrimino implements Mino {
         return id;
     }
 
-    @Override
-    public int size() {
+    public static int size() {
         return 7;
     }
 

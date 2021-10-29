@@ -1,6 +1,6 @@
 package tet4wren.environment;
 
-public abstract class Generator {
+public abstract class MinoGenerator {
     /**
      * 破壊的な命令です。
      * 次のミノを出力します。

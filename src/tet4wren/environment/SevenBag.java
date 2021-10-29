@@ -2,7 +2,7 @@ package tet4wren.environment;
 
 import java.util.Random;
 
-public class SevenBag extends Generator {
+public class SevenBag extends MinoGenerator {
     private final Random random;
     private int displacement;
     private final Tetrimino[] buffer = new Tetrimino[7];

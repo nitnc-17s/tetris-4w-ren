@@ -3,11 +3,11 @@ package tet4wren.environment;
 import java.util.Arrays;
 
 public class MinoHolder {
-    private final Generator minoGenerator;
+    private final MinoGenerator minoGenerator;
     // minoBuffer[0] is HoldMino
     // minoBuffer[1] is CurrentMino
     private final Mino[] minoBuffer;
-    public MinoHolder(int nextNumber, Generator minoGenerator) {
+    public MinoHolder(int nextNumber, MinoGenerator minoGenerator) {
         this.minoGenerator = minoGenerator;
         minoBuffer = new Mino[nextNumber+2];
         for (int i = 0; i < minoBuffer.length; i++) {

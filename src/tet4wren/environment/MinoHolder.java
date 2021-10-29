@@ -16,7 +16,7 @@ public class MinoHolder {
     }
 
     public Mino consume(boolean consumeCurrent) {
-        if (consumeCurrent) {
+        if (!consumeCurrent) {
             Mino tmp = minoBuffer[0];
             minoBuffer[0] = minoBuffer[1];
             minoBuffer[1] = tmp;

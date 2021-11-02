@@ -65,6 +65,10 @@ public enum BlockState {
             {B28, null, null, B25, null, B25, null, B26, null, B24, null, B24, null, B26, null, null, null, null, null},
     };
 
+    public static int stateSize() {
+        return values().length;
+    }
+
     private final int id;
     private final int block;
     BlockState(int id, int block) {

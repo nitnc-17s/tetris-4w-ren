@@ -11,6 +11,7 @@ public class EnvironmentTest {
                 for (int i = 0; i < 7; i++) {
                     Tetrimino next = sevenBag.next();
                     assert !tetriminos.contains(next);
+                    assert next != null;
                     tetriminos.add(next);
                 }
                 tetriminos.clear();

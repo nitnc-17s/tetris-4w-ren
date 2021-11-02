@@ -49,17 +49,42 @@ public class MinoHolder {
                 '}';
     }
 
-    public int toInt() throws Exception {
+    public int stateSize() {
+        int base = 1;
+        for (Mino ignored : minoBuffer) {
+            base *= Tetrimino.size();
+        }
+        return base;
+    }
+
+    public int toState() {
         int index = 0;
         int base = 1;
         for (Mino mino : minoBuffer) {
             if (!(mino instanceof Tetrimino)) {
-                throw new Exception("Not Tetrimino is Containing");
+                return -1;
             }
             index += base * mino.getId();
             base *= Tetrimino.size();
         }
         return index;
+    }
+
+    public static MinoHolder[] allStates(int nextNumber) {
+        // nextが全部 同じ種類とかになる パターンが出るけど 知ったこっちゃない
+        MinoHolder sampleMinoHolder = new MinoHolder(nextNumber, new SevenBag(0));
+        int length = sampleMinoHolder.stateSize();
+        MinoHolder[] allStates = new MinoHolder[length];
+        for (int i = 0; i < length; i++) {
+            final MinoHolder minoHolder = new MinoHolder(nextNumber, new SevenBag(0));
+            int tetriminoIndex = i;
+            for (int j = 0; j < minoHolder.minoBuffer.length; j++) {
+                minoHolder.minoBuffer[j] = Tetrimino.values()[tetriminoIndex%Tetrimino.size()];
+                tetriminoIndex /= Tetrimino.size();
+            }
+            allStates[i] = minoHolder;
+        }
+        return allStates;
     }
 
 }

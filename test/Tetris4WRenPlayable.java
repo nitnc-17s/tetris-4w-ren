@@ -1,4 +1,4 @@
-import tet4wren.environment.*;
+import jp.ac.nara_k.info.tetris_4w_ren.environment.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;

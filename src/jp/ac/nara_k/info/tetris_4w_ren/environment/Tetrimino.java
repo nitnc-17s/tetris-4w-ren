@@ -1,4 +1,4 @@
-package tet4wren.environment;
+package jp.ac.nara_k.info.tetris_4w_ren.environment;
 
 public enum Tetrimino implements Mino {
     I(0), O(1), T(2), L(3), J(4), S(5), Z(6),;

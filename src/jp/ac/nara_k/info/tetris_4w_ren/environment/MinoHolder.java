@@ -1,4 +1,4 @@
-package tet4wren.environment;
+package jp.ac.nara_k.info.tetris_4w_ren.environment;
 
 import java.util.Arrays;
 

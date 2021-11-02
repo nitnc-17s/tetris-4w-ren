@@ -1,11 +1,9 @@
-package tet4wren.environment;
+package jp.ac.nara_k.info.tetris_4w_ren.environment;
 
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.Random;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class EnvironmentTest {
 

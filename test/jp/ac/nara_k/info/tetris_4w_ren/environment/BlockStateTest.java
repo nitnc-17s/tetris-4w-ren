@@ -1,11 +1,6 @@
-package tet4wren.environment;
+package jp.ac.nara_k.info.tetris_4w_ren.environment;
 
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.Scanner;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class BlockStateTest {
 

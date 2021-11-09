@@ -11,8 +11,8 @@ class BlockStateTest {
             BlockState blockState = BlockState.B3;
             int renCount = -2;
             while (blockState != null) {
-                Tetrimino current = (Tetrimino) minoHolder.getCurrentMino();
-                Tetrimino hold = (Tetrimino) minoHolder.getHoldMino();
+                Tetrimino current = minoHolder.getCurrentMino();
+                Tetrimino hold = minoHolder.getHoldMino();
                 BlockState next_state = null;
                 boolean consumeCurrent = true;
                 for (TetriminoPlacement placement : TetriminoPlacement.placementsFromTetrimino(current)) {
@@ -33,7 +33,7 @@ class BlockStateTest {
                     }
                 }
                 System.out.println(minoHolder);
-                Mino mino = minoHolder.consume(consumeCurrent);
+                Tetrimino mino = minoHolder.consume(consumeCurrent);
                 System.out.print(blockState.toBlockAscii());
                 System.out.println("vvv USAGE: " + mino + " vvv");
                 blockState = next_state;

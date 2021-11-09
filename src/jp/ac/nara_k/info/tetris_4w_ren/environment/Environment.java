@@ -42,7 +42,7 @@ public class Environment {
         placementsList.clear();
         nextBlockStateList.clear();
         currentPlacementBound = 0;
-        for (TetriminoPlacement placement : TetriminoPlacement.placementsFromTetrimino((Tetrimino) minoHolder.getCurrentMino())) {
+        for (TetriminoPlacement placement : TetriminoPlacement.placementsFromTetrimino(minoHolder.getCurrentMino())) {
             BlockState next = blockState.nextState(placement);
             if ( next != null ) {
                 placementsList.add(placement);
@@ -50,7 +50,7 @@ public class Environment {
                 currentPlacementBound++;
             }
         }
-        for (TetriminoPlacement placement : TetriminoPlacement.placementsFromTetrimino((Tetrimino) minoHolder.getHoldMino())) {
+        for (TetriminoPlacement placement : TetriminoPlacement.placementsFromTetrimino(minoHolder.getHoldMino())) {
             BlockState next = blockState.nextState(placement);
             if ( next != null ) {
                 placementsList.add(placement);
@@ -61,7 +61,7 @@ public class Environment {
 
     public double action(int actionIndex) {
         boolean useCurrent = actionIndex < currentPlacementBound;
-        Mino mino = minoHolder.consume(useCurrent);
+        Tetrimino mino = minoHolder.consume(useCurrent);
         blockState = nextBlockStateList.get(actionIndex);
         updateNextStates();
         return isFinalState() ? -1 : 1;

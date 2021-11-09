@@ -13,8 +13,8 @@ public class Tetris4WRenPlayable {
         int renCount = -1;
 
         while (true) {
-            Tetrimino current = (Tetrimino) minoHolder.getCurrentMino();
-            Tetrimino hold = (Tetrimino) minoHolder.getHoldMino();
+            Tetrimino current = minoHolder.getCurrentMino();
+            Tetrimino hold = minoHolder.getHoldMino();
             ArrayList<BlockState> nextStates = new ArrayList<>();
             boolean consumeCurrent = true;
             int currentBound = 0;
@@ -53,7 +53,7 @@ public class Tetris4WRenPlayable {
                 }
             }
 
-            Mino mino = minoHolder.consume(consumeCurrent);
+            Tetrimino mino = minoHolder.consume(consumeCurrent);
             System.out.println("vvv USAGE: " + mino + " vvv");
             blockState = nextState;
             renCount++;

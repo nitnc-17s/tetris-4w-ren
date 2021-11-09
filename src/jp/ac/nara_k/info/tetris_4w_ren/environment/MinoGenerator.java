@@ -6,5 +6,5 @@ public abstract class MinoGenerator {
      * 次のミノを出力します。
      * @return 未知である次のミノ
      */
-    abstract public Mino next();
+    abstract public Tetrimino next();
 }

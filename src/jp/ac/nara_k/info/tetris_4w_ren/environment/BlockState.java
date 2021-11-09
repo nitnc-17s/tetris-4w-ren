@@ -65,25 +65,22 @@ public enum BlockState {
             {B28, null, null, B25, null, B25, null, B26, null, B24, null, B24, null, B26, null, null, null, null, null},
     };
 
-    public static int stateSize() {
-        return values().length;
-    }
-
     private final int id;
     private final int block;
+
     BlockState(int id, int block) {
         this.id = id;
         this.block = block;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public BlockState nextState(TetriminoPlacement placement) {
         int state = this.getId();
         int place = placement.getId();
         return blockStateTransition[state][place];
+    }
+
+    public static int stateSize() {
+        return values().length;
     }
 
     public String toBlockAscii() {
@@ -96,4 +93,7 @@ public enum BlockState {
         return ret.toString();
     }
 
+    public int getId() {
+        return id;
+    }
 }

@@ -32,6 +32,7 @@ public enum TetriminoPlacement {
             {Z1, Z2},
     };
     private final int id;
+
     TetriminoPlacement(int id) {
         this.id = id;
     }
@@ -43,5 +44,4 @@ public enum TetriminoPlacement {
     public static TetriminoPlacement[] placementsFromTetrimino(Tetrimino tetrimino) {
         return tetriminoPlacementsLists[tetrimino.getId()];
     }
-
 }

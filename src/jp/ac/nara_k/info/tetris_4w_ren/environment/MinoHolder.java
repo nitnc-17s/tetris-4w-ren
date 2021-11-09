@@ -7,6 +7,7 @@ public class MinoHolder {
     // minoBuffer[0] is HoldMino
     // minoBuffer[1] is CurrentMino
     private final Mino[] minoBuffer;
+
     public MinoHolder(int nextNumber, MinoGenerator minoGenerator) {
         this.minoGenerator = minoGenerator;
         minoBuffer = new Mino[nextNumber+2];
@@ -86,5 +87,4 @@ public class MinoHolder {
         }
         return allStates;
     }
-
 }

@@ -42,5 +42,4 @@ class BlockStateTest {
             System.out.println("End: " + renCount + "REN\n");
         }
     }
-
 }

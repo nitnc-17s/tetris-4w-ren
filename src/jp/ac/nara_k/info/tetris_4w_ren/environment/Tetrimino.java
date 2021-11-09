@@ -16,5 +16,4 @@ public enum Tetrimino implements Mino {
     public static int size() {
         return 7;
     }
-
 }

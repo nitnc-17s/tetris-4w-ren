@@ -28,7 +28,11 @@ public abstract class Agent {
         return environment.state();
     }
 
-    public void run(int maxCycle) {
+    public void run() {
+        doCycle();
+    }
+
+    public void learn(int maxCycle) {
         for (int cycle = 1; cycle<= maxCycle; cycle++) {
             doCycle();
         }

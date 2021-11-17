@@ -4,6 +4,8 @@ import jp.ac.nara_k.info.tetris_4w_ren.environment.Environment;
 
 import java.util.ArrayDeque;
 import java.util.Queue;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SimpleProfitSharingAgent extends Agent {
 
@@ -13,18 +15,22 @@ public class SimpleProfitSharingAgent extends Agent {
      */
     private double temperature;
     private final Queue<StateActionTuple> rules;
+    private final List<Integer> renResults;
 
     public SimpleProfitSharingAgent(int nextSize) {
         super(nextSize);
         this.cBid = 0.2;
         this.temperature = 1.0;
         this.rules = new ArrayDeque<>();
+        this.renResults = new ArrayList<>();
     }
 
     @Override
     public void doCycle() {
+        int ren = -1;
         this.environment = new Environment(this.nextSize);
         while (!environment.isFinalState()) {
+            ren++;
             int state = this.environment.state();
             int action = this.selectAction(state);
             this.rules.add(new StateActionTuple(state, action));
@@ -41,6 +47,7 @@ public class SimpleProfitSharingAgent extends Agent {
                 this.rules.clear();
             }
         }
+        this.renResults.add(ren);
     }
 
     public void setCBid(double cBid) {
@@ -60,6 +67,14 @@ public class SimpleProfitSharingAgent extends Agent {
 
     public double getTemperature() {
         return temperature;
+    }
+
+    public void clearRenResults() {
+        this.renResults.clear();
+    }
+
+    public List<Integer> getRenResults() {
+        return renResults;
     }
 
     @Override

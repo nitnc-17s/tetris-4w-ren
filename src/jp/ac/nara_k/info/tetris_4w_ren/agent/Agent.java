@@ -6,19 +6,19 @@ import java.util.Random;
 
 public abstract class Agent {
     // param
-    int episodeCount;
+    int maxCycle;
     int nextSize;
 
     Random randomGenerator;
     Environment environment;
     double[][] qTable;
 
-    public Agent(int episodeCount, int nextSize) {
-        this(episodeCount, nextSize, new Random().nextLong());
+    public Agent(int maxCycle, int nextSize) {
+        this(maxCycle, nextSize, new Random().nextLong());
     }
 
-    public Agent(int episodeCount, int nextSize, long seed) {
-        this.episodeCount = episodeCount;
+    public Agent(int maxCycle, int nextSize, long seed) {
+        this.maxCycle = maxCycle;
         this.nextSize = nextSize;
 
         this.randomGenerator = new Random(seed);
@@ -30,6 +30,12 @@ public abstract class Agent {
         return environment.state();
     }
 
-    public abstract void run();
+    public void run() {
+        for (int cycle = 1; cycle<= maxCycle; cycle++) {
+            doCycle();
+        }
+    }
+
+    public abstract void doCycle();
     abstract int selectAction(double[][] QTable, int state);
 }

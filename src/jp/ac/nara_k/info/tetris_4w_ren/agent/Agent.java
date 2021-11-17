@@ -37,5 +37,5 @@ public abstract class Agent {
     }
 
     public abstract void doCycle();
-    abstract int selectAction(double[][] QTable, int state);
+    abstract int selectAction(int state);
 }

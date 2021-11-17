@@ -34,7 +34,7 @@ public class SimpleProfitSharingAgent extends Agent {
             int state = this.environment.state();
             int action = this.selectAction(state);
             this.rules.add(new StateActionTuple(state, action));
-            if (rules.size() > 6) {
+            if (rules.size() > 3) {
                 rules.poll();
             }
             double reward = this.environment.action(action);

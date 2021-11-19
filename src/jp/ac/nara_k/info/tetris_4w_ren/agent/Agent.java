@@ -37,8 +37,8 @@ public abstract class Agent {
         System.out.println(environment);
     }
 
-    public void learn(int maxCycle) {
-        for (int cycle = 1; cycle<= maxCycle; cycle++) {
+    public void learn(long maxCycle) {
+        for (long cycle = 1; cycle<= maxCycle; cycle++) {
             doCycle();
             initEnvironment();
         }

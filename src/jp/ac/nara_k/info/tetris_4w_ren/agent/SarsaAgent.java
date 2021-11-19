@@ -19,12 +19,41 @@ public class SarsaAgent extends Agent {
     }
 
     @Override
+    public void run() {
+        int ren = 0;
+
+        int s = getState();
+        int a = greedySelectAction(s);
+
+        while (!environment.isFinalState()) {
+            System.err.println(environment.getBlockState().toBlockAscii());
+
+            environment.action(a);
+
+            if (environment.isFinalState()) {
+                break;
+            }
+
+            s = getState();
+            a = greedySelectAction(s);
+
+            ren++;
+        }
+
+        System.out.println("REN: " + ren);
+    }
+
+    @Override
     public void doCycle() {
         int s = getState();
         int a = selectAction(s);
 
         while (!environment.isFinalState()) {
             double r = environment.action(a);
+
+            if (environment.isFinalState()) {
+                break;
+            }
 
             int nextS = getState();
             int nextA = selectAction(nextS);
@@ -38,19 +67,27 @@ public class SarsaAgent extends Agent {
 
     @Override
     int selectAction(int state) {
-        int action = -1;
+        int action;
 
         double rand = randomGenerator.nextDouble();
 
         if (rand > epsilon) { // greedy
-            double maxR = Double.MIN_VALUE;
-            for (int i=0; i<qTable[state].length; i++) {
-                if (qTable[state][i] > maxR) {
-                    action = i;
-                }
-            }
+            action = greedySelectAction(state);
         } else { // random
             action = randomGenerator.nextInt(qTable[state].length);
+        }
+
+        return action;
+    }
+
+    private int greedySelectAction(int state) {
+        int action = -1;
+        double maxR = - Double.MAX_VALUE;
+
+        for (int i=0; i<qTable[state].length; i++) {
+            if (qTable[state][i] > maxR) {
+                action = i;
+            }
         }
 
         return action;

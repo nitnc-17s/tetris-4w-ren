@@ -34,6 +34,7 @@ public abstract class Agent {
 
     public void run() {
         doCycle();
+        System.out.println(environment);
     }
 
     public void learn(int maxCycle) {

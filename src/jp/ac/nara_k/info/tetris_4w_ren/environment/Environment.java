@@ -97,8 +97,8 @@ public class Environment {
 
     @Override
     public String toString() {
-        return "Status\n" +
-                minoHolder + "\n" +
-                blockState.toBlockAscii();
+        return "Environment state\n" +
+            minoHolder + "\n" +
+            blockState.toBlockAscii();
     }
 }

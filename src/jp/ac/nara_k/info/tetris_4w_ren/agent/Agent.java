@@ -19,9 +19,13 @@ public abstract class Agent {
     public Agent(int nextSize, long seed) {
         this.nextSize = nextSize;
 
-        this.randomGenerator = new Random(seed);
-        this.environment = new Environment(nextSize, seed);
-        this.qTable = environment.getInitializedQList();
+        randomGenerator = new Random(seed);
+        initEnvironment();
+        qTable = environment.getInitializedQList();
+    }
+
+    private void initEnvironment() {
+        this.environment = new Environment(nextSize, randomGenerator.nextLong());
     }
 
     int getState() {
@@ -35,6 +39,7 @@ public abstract class Agent {
     public void learn(int maxCycle) {
         for (int cycle = 1; cycle<= maxCycle; cycle++) {
             doCycle();
+            initEnvironment();
         }
     }
 

@@ -94,4 +94,11 @@ public class Environment {
     public BlockState getBlockState() {
         return blockState;
     }
+
+    @Override
+    public String toString() {
+        return "Environment state\n" +
+            minoHolder + "\n" +
+            blockState.toBlockAscii();
+    }
 }

@@ -8,18 +8,28 @@ class SimpleProfitSharingAgentTest {
 
     @Test
     void learn() {
-        SimpleProfitSharingAgent agent = new SimpleProfitSharingAgent(2);
+        SimpleProfitSharingAgent agent = new SimpleProfitSharingAgent(3, 0x998244353L);
+
+        // random run
         agent.setCBid(0.0);
-        agent.setTemperature(1);
+        agent.setRecordRenResultsFlag(true);
         agent.learn(1000);
-        agent.setCBid(0.1);
         System.err.println(average(agent.getRenResults()));
         System.err.println(max(agent.getRenResults()));
+        agent.clearRenResults();
+
+        // lets learn
+        agent.setCBid(0.01);
+        agent.setTemperature(1);
+        agent.setRulesEffectLength(3);
+        agent.setRecordRenResultsFlag(false);
         agent.learn(1000000);
 
-        agent.clearRenResults();
-        for (int i = 0; i < 1000; i++) agent.run();
+        // final learning result
+        agent.setCBid(0);
         agent.setTemperature(1e-5);
+        agent.setRecordRenResultsFlag(true);
+        agent.learn(1000);
         System.err.println(average(agent.getRenResults()));
         System.err.println(max(agent.getRenResults()));
     }

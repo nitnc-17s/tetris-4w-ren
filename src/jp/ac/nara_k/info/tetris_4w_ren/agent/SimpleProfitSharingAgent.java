@@ -9,20 +9,23 @@ import java.util.List;
 
 public class SimpleProfitSharingAgent extends Agent {
 
-    private double cBid;
     /**
      * Temperature for SoftmaxSelection
      */
-    private double temperature;
-    private final Queue<StateActionTuple> rules;
-    private final List<Integer> renResults;
+    private double temperature = 1.0;
+    private double cBid = 0.2;
+    private final Queue<StateActionTuple> rules = new ArrayDeque<>();
+    private int rulesEffectLength = 2;
+
+    private final List<Integer> renResults = new ArrayList<>();
+    private boolean recordRenResultsFlag = false;
 
     public SimpleProfitSharingAgent(int nextSize) {
         super(nextSize);
-        this.cBid = 0.2;
-        this.temperature = 1.0;
-        this.rules = new ArrayDeque<>();
-        this.renResults = new ArrayList<>();
+    }
+
+    public SimpleProfitSharingAgent(int nextSize, long seed) {
+        super(nextSize, seed);
     }
 
     @Override
@@ -34,7 +37,7 @@ public class SimpleProfitSharingAgent extends Agent {
             int state = this.environment.state();
             int action = this.selectAction(state);
             this.rules.add(new StateActionTuple(state, action));
-            if (rules.size() > 3) {
+            if (rules.size() > rulesEffectLength) {
                 rules.poll();
             }
             double reward = this.environment.action(action);
@@ -47,7 +50,9 @@ public class SimpleProfitSharingAgent extends Agent {
                 this.rules.clear();
             }
         }
-        this.renResults.add(ren);
+        if (this.isRecordRenResultsFlag()) {
+            this.renResults.add(ren);
+        }
     }
 
     public void setCBid(double cBid) {
@@ -56,6 +61,18 @@ public class SimpleProfitSharingAgent extends Agent {
 
     public double getCBid() {
         return cBid;
+    }
+
+    public void setRulesEffectLength(int rulesEffectLength) {
+        this.rulesEffectLength = rulesEffectLength;
+    }
+
+    public void setRecordRenResultsFlag(boolean recordRenResultsFlag) {
+        this.recordRenResultsFlag = recordRenResultsFlag;
+    }
+
+    public boolean isRecordRenResultsFlag() {
+        return recordRenResultsFlag;
     }
 
     public void setTemperature(double temperature) {
@@ -92,7 +109,7 @@ public class SimpleProfitSharingAgent extends Agent {
         for (int i = 0; i < actionLength; i++) {
             if (selection < softmaxAccumulations[i+1]) return i;
         }
-        return actionLength;
+        return actionLength - 1;
     }
 }
 

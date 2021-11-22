@@ -28,6 +28,13 @@ class EnvironmentTest {
     }
 
     @Test
+    void callToString() {
+        System.out.println(new Environment(0, 0xda0bea0232bb06ebL));
+        System.out.println();
+        System.out.println(new Environment(4, 0xda0bea0232bb06ebL));
+    }
+
+    @Test
     void state() {
     }
 

@@ -5,12 +5,8 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 public class MonteCarloAgentTest {
-
     ArrayList<Integer> ranRen = new ArrayList<>();
     ArrayList<Integer> aftRen = new ArrayList<>();
-
-
-
     @Test
     public void run() {
         MonteCarloAgent agent = new MonteCarloAgent(3);
@@ -20,25 +16,25 @@ public class MonteCarloAgentTest {
 
     @Test
     public void learning() {
-        for (int i=0;i<100;i++) {
+        for (int i = 0; i < 100; i++) {
             this.run();
         }
         int ranSum = 0;
-        for (int i=0;i<100;i++) {
+        for (int i = 0; i < 100; i++) {
             ranSum += this.ranRen.get(i);
         }
-        System.out.println((double)ranSum/100);
+        System.out.println((double) ranSum/100);
 
 
         MonteCarloAgent agent = new MonteCarloAgent(3);
         agent.learn(1000000);
 
 
-        for (int i=0;i<100;i++) {
+        for (int i = 0; i < 100; i++) {
             this.runTest();
         }
         int aftSum = 0;
-        for (int i=0;i<100;i++) {
+        for (int i = 0; i < 100; i++) {
             aftSum += this.aftRen.get(i);
         }
         System.out.println((double) aftSum/100);
@@ -50,5 +46,4 @@ public class MonteCarloAgentTest {
         agent.doCycleTest();
         this.aftRen.add(agent.episodeCount-1);
     }
-
 }

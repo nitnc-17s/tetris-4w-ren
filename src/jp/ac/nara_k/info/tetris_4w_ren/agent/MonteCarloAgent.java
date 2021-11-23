@@ -1,7 +1,5 @@
 package jp.ac.nara_k.info.tetris_4w_ren.agent;
 
-import jp.ac.nara_k.info.tetris_4w_ren.environment.Environment;
-
 import java.util.ArrayList;
 
 import  java.lang.Integer;
@@ -12,8 +10,6 @@ public class MonteCarloAgent extends Agent{
     int episodeCount;
     ArrayList<Integer> ren = new ArrayList<>();
 
-
-
     public ArrayList<Integer> getRen() {
         return ren;
     }
@@ -22,13 +18,12 @@ public class MonteCarloAgent extends Agent{
         this.ren = ren;
     }
 
-
-
     public MonteCarloAgent(int nextSize) {
         super(nextSize);
         episodeCount = 0;
     }
 
+    @Override
     int selectAction(int state){
         int N = qTable[state].length;
         int act = this.randomGenerator.nextInt(N);
@@ -37,8 +32,9 @@ public class MonteCarloAgent extends Agent{
         return act;
     }
 
+    @Override
     public void doCycle() {
-        while(!environment.isFinalState()){
+        while (!environment.isFinalState()) {
             int act = selectAction(getState());
             environment.action(act);
             this.episodeCount++;
@@ -46,8 +42,8 @@ public class MonteCarloAgent extends Agent{
 
         int N =episodeCount;
 
-        for(int i = 0;i<N;i++) {
-            if(N - i < 3 ) {
+        for (int i = 0; i < N; i++) {
+            if (N - i < 3) {
                 this.qTable[states.get(i)][actions.get(i)] -= 2;
             }else {
                 this.qTable[states.get(i)][actions.get(i)] += 1;
@@ -57,8 +53,9 @@ public class MonteCarloAgent extends Agent{
 
         }
     }
+
     public void doCycleRand() {
-        while(!environment.isFinalState()){
+        while (!environment.isFinalState()) {
             int act = selectAction(getState());
             environment.action(act);
             this.episodeCount++;
@@ -66,7 +63,7 @@ public class MonteCarloAgent extends Agent{
     }
 
     public void doCycleTest(){
-        while(!environment.isFinalState()){
+        while (!environment.isFinalState()) {
             int act = selectActionTest(getState());
             environment.action(act);
             this.episodeCount++;
@@ -74,14 +71,12 @@ public class MonteCarloAgent extends Agent{
 
     }
 
-
-
     public int selectActionTest(int state){
         int N = qTable[state].length;
         int act=0;
-        for (int i=0;i<N;i++){
-            for (int j=i;j<N;j++){
-                if(this.qTable[state][j] > this.qTable[state][act]){
+        for (int i = 0; i < N; i++) {
+            for (int j = i; j < N; j++) {
+                if (this.qTable[state][j] > this.qTable[state][act]) {
                     act=j;
                 }
             }

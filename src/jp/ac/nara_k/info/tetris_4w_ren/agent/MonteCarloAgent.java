@@ -23,6 +23,7 @@ public class MonteCarloAgent extends Agent{
         episodeCount = 0;
     }
 
+    @Override
     int selectAction(int state){
         int N = qTable[state].length;
         int act = this.randomGenerator.nextInt(N);
@@ -31,6 +32,7 @@ public class MonteCarloAgent extends Agent{
         return act;
     }
 
+    @Override
     public void doCycle() {
         while (!environment.isFinalState()) {
             int act = selectAction(getState());

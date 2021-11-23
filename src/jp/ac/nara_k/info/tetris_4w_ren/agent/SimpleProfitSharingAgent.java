@@ -31,7 +31,6 @@ public class SimpleProfitSharingAgent extends Agent {
     @Override
     public void doCycle() {
         int ren = -1;
-        this.environment = new Environment(this.nextSize);
         while (!environment.isFinalState()) {
             ren++;
             int state = this.environment.state();

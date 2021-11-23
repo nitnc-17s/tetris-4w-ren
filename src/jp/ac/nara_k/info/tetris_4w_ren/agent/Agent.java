@@ -32,9 +32,9 @@ public abstract class Agent {
         return environment.state();
     }
 
-    public void run() {
+    public int run() {
         doCycle();
-        System.out.println(environment);
+        return -1;
     }
 
     public void learn(long printCycle, long printTimes) {

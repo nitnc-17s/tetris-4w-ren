@@ -38,6 +38,20 @@ public class MonteCarloAgent extends Agent{
     }
 
     @Override
+    public int run() {
+        while (!environment.isFinalState()) {
+            int act = selectAction(getState());
+            environment.action(act);
+            this.episodeCount++;
+        }
+
+        int ren = episodeCount;
+        this.episodeCount = 0;
+
+        return ren;
+    }
+
+    @Override
     public void doCycle() {
         while (!environment.isFinalState()) {
             int act = selectAction(getState());

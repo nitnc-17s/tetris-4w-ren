@@ -19,6 +19,18 @@ public class QAgent extends Agent{
     }
 
     @Override
+    public int run(){
+        int ren = -1;
+        while(!environment.isFinalState()){
+            ren++;
+            int state = getState();
+            int action = getMaxIndex(qTable[state]);
+            environment.action(action);
+        }
+        return ren;
+    }
+
+    @Override
     public void doCycle(){
         int ren = -1;
         while(!environment.isFinalState()){

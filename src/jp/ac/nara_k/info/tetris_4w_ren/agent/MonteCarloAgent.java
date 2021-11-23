@@ -23,6 +23,11 @@ public class MonteCarloAgent extends Agent{
         episodeCount = 0;
     }
 
+    public MonteCarloAgent(int nextSize, long seed) {
+        super(nextSize, seed);
+        episodeCount = 0;
+    }
+
     @Override
     int selectAction(int state){
         int N = qTable[state].length;

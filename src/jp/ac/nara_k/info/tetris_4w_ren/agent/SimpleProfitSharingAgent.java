@@ -37,9 +37,7 @@ public class SimpleProfitSharingAgent extends Agent {
 
     @Override
     public void doCycle() {
-        int ren = -1;
         while (!environment.isFinalState()) {
-            ren++;
             int state = getState();
             int action = selectAction(state);
             rules.add(new StateActionTuple(state, action));
@@ -56,17 +54,29 @@ public class SimpleProfitSharingAgent extends Agent {
                 rules.clear();
             }
         }
-        if (isRecordRenResultsFlag()) {
-            renResults.add(ren);
-        }
     }
 
     @Override
     public void run() {
-        double tmpEpsilon = epsilon;
-        epsilon = 0.0;
-        doCycle();
-        epsilon = tmpEpsilon;
+        double tmpTemperature = getTemperature();
+        setTemperature(5e-3);
+        double tmpEpsilon = getEpsilon();
+        setEpsilon(0.0);
+
+        int ren = -1;
+        while (!environment.isFinalState()) {
+            System.err.println(environment);
+            ren++;
+            int state = getState();
+            int action = selectAction(state);
+            environment.action(action);
+        }
+        System.err.println(environment);
+        System.err.printf("REN: %d\n", ren);
+        renResults.add(ren);
+
+        setEpsilon(tmpEpsilon);
+        setTemperature(tmpTemperature);
     }
 
     public void setCBid(double cBid) {

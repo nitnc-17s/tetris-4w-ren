@@ -20,7 +20,7 @@ public class SarsaAgent extends Agent {
 
     @Override
     public void run() {
-        int ren = 0;
+        int ren = -1;
 
         int s = getState();
         int a = greedySelectAction(s);

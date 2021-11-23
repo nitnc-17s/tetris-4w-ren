@@ -20,7 +20,6 @@ public class SimpleProfitSharingAgent extends Agent {
     private int rulesEffectLength = 2;
 
     private final List<Integer> renResults = new ArrayList<>();
-    private boolean recordRenResultsFlag = false;
 
     public SimpleProfitSharingAgent(int nextSize) {
         super(nextSize);
@@ -89,14 +88,6 @@ public class SimpleProfitSharingAgent extends Agent {
 
     public void setRulesEffectLength(int rulesEffectLength) {
         this.rulesEffectLength = rulesEffectLength;
-    }
-
-    public void setRecordRenResultsFlag(boolean recordRenResultsFlag) {
-        this.recordRenResultsFlag = recordRenResultsFlag;
-    }
-
-    public boolean isRecordRenResultsFlag() {
-        return recordRenResultsFlag;
     }
 
     public void setTemperature(double temperature) {

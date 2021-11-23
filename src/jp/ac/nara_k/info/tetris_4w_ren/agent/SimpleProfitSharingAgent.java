@@ -64,7 +64,7 @@ public class SimpleProfitSharingAgent extends Agent {
 
         int ren = -1;
         while (!environment.isFinalState()) {
-            System.err.println(environment);
+            // System.err.println(environment);
             ren++;
             int state = getState();
             int action = selectAction(state);

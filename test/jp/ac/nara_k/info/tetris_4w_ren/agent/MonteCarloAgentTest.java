@@ -14,7 +14,7 @@ public class MonteCarloAgentTest {
     @Test
     public void learn() {
         Agent agent = new MonteCarloAgent(2, 0xf948b319a72a4ae8L);
-        agent.learn(10000, 100);
+        agent.learn(10000, 100, 1);
     }
 
     /*

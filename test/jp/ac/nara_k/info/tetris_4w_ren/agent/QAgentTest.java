@@ -12,6 +12,6 @@ public class QAgentTest {
     @Test
     public void learn() {
         Agent agent = new QAgent(2, 0.8, 0.2, 1e-4, 0xf948b319a72a4ae8L);
-        agent.learn(10000, 100);
+        agent.learn(10000, 100, 1);
     }
 }

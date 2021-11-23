@@ -37,9 +37,15 @@ public abstract class Agent {
         return -1;
     }
 
-    public void learn(long printCycle, long printTimes) {
-        System.out.println("index, REN");
-        System.out.println("0, " + run() + "");
+    public void learn(long printCycle, long printTimes, int sampleTimes) {
+        int sum = 0;
+        for (int i = 0; i < sampleTimes; i++) {
+            sum += run();
+            initEnvironment();
+        }
+        double avg = (double) sum / sampleTimes;
+        System.out.println("index\tREN");
+        System.out.println("0\t" + avg);
 
         for (long count = 1; count <= printTimes; count++) {
             for (long cycle = 1; cycle <= printCycle; cycle++) {
@@ -47,7 +53,13 @@ public abstract class Agent {
                 initEnvironment();
             }
 
-            System.out.println(count * printCycle + ", " + run() + "");
+            sum = 0;
+            for (int i = 0; i < sampleTimes; i++) {
+                sum += run();
+                initEnvironment();
+            }
+            avg = (double) sum / sampleTimes;
+            System.out.println(count * printCycle + "\t" + avg);
         }
     }
 

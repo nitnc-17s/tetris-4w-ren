@@ -27,7 +27,7 @@ public class MonteCarloAgentTest {
 
 
         MonteCarloAgent agent = new MonteCarloAgent(3);
-        agent.learn(1000000);
+        agent.learn(10000, 100);
 
 
         for (int i = 0; i < 100; i++) {

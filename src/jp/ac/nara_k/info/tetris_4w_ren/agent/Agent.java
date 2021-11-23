@@ -37,10 +37,17 @@ public abstract class Agent {
         System.out.println(environment);
     }
 
-    public void learn(long maxCycle) {
-        for (long cycle = 1; cycle <= maxCycle; cycle++) {
-            doCycle();
-            initEnvironment();
+    public void learn(long printCycle, long printTimes) {
+        System.out.println("index, REN");
+        System.out.println("0, " + run() + "");
+
+        for (long count = 1; count <= printTimes; count++) {
+            for (long cycle = 1; cycle <= printCycle; cycle++) {
+                doCycle();
+                initEnvironment();
+            }
+
+            System.out.println(count * printCycle + ", " + run() + "");
         }
     }
 

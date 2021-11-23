@@ -42,7 +42,7 @@ public class QAgent extends Agent{
         }
     }
 
-    private double getMax(double arr[]){
+    private double getMax(double[] arr){
         double max = 0;
         for(int i = 0; i < arr.length; i++){
             if(max < arr[i]){
@@ -52,7 +52,7 @@ public class QAgent extends Agent{
         return max;
     }
 
-    private int getMaxIndex(double table[]){
+    private int getMaxIndex(double[] table){
         Random rand = new Random();
         int maxIndex = 0;
         int maxCount = 1;

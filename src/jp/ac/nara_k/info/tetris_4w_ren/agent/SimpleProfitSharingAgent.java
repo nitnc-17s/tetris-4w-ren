@@ -11,6 +11,10 @@ public class SimpleProfitSharingAgent extends Agent {
      * Temperature for SoftmaxSelection
      */
     private double temperature = 1.0;
+    /**
+     * Random Probability, epsilon, for EpsilonGreedySelection
+     */
+    private double epsilon = 0.5;
     private double cBid = 0.2;
     private final Queue<StateActionTuple> rules = new ArrayDeque<>();
     private int rulesEffectLength = 2;
@@ -24,6 +28,11 @@ public class SimpleProfitSharingAgent extends Agent {
 
     public SimpleProfitSharingAgent(int nextSize, long seed) {
         super(nextSize, seed);
+    }
+
+    public SimpleProfitSharingAgent(int nexstSize, double epsilon, long seed) {
+        super(nexstSize, seed);
+        this.epsilon = epsilon;
     }
 
     @Override
@@ -50,6 +59,14 @@ public class SimpleProfitSharingAgent extends Agent {
         if (isRecordRenResultsFlag()) {
             renResults.add(ren);
         }
+    }
+
+    @Override
+    public void run() {
+        double tmpEpsilon = epsilon;
+        epsilon = 0.0;
+        doCycle();
+        epsilon = tmpEpsilon;
     }
 
     public void setCBid(double cBid) {
@@ -83,6 +100,14 @@ public class SimpleProfitSharingAgent extends Agent {
         return temperature;
     }
 
+    public double getEpsilon() {
+        return epsilon;
+    }
+
+    public void setEpsilon(double epsilon) {
+        this.epsilon = epsilon;
+    }
+
     public void clearRenResults() {
         renResults.clear();
     }
@@ -93,7 +118,32 @@ public class SimpleProfitSharingAgent extends Agent {
 
     @Override
     int selectAction(int state) {
-        return softmaxSelectAction(state);
+        return epsilonGreedySelectAction(state);
+        // return softmaxSelectAction(state);
+    }
+
+    private int epsilonGreedySelectAction(int state) {
+        double selection = randomGenerator.nextDouble();
+        if (selection > epsilon) {
+            return greedySelectAction(state);
+        } else {
+            int actionLength = qTable[state].length;
+            return randomGenerator.nextInt(actionLength);
+        }
+    }
+
+    private int greedySelectAction(int state) {
+        int actionLength = qTable[state].length;
+        if (actionLength == 0) return -1;
+        int maxIndex = 0;
+        double maxQValue = qTable[state][0];
+        for (int i = 1; i < actionLength; i++) {
+            if (qTable[state][i] > maxQValue) {
+                maxIndex = i;
+                maxQValue = qTable[state][i];
+            }
+        }
+        return maxIndex;
     }
 
     private int softmaxSelectAction(int state) {

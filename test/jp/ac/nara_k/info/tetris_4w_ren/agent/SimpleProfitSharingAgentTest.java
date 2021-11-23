@@ -12,7 +12,6 @@ class SimpleProfitSharingAgentTest {
 
         // random run
         agent.setCBid(0.0);
-        agent.setRecordRenResultsFlag(true);
         agent.run();
         System.err.println(average(agent.getRenResults()));
         System.err.println(max(agent.getRenResults()));
@@ -22,13 +21,11 @@ class SimpleProfitSharingAgentTest {
         agent.setCBid(0.01);
         agent.setTemperature(1);
         agent.setRulesEffectLength(3);
-        agent.setRecordRenResultsFlag(false);
         agent.learn(1_000_000);
 
         // final learning result
         agent.setCBid(0);
         agent.setTemperature(5e-3);
-        agent.setRecordRenResultsFlag(true);
         agent.run();
         System.err.println(average(agent.getRenResults()));
         System.err.println(max(agent.getRenResults()));

@@ -1,7 +1,5 @@
 package jp.ac.nara_k.info.tetris_4w_ren.agent;
 
-import jp.ac.nara_k.info.tetris_4w_ren.environment.Environment;
-
 import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.ArrayList;
@@ -76,7 +74,7 @@ public class SimpleProfitSharingAgent extends Agent {
 
     public void setTemperature(double temperature) {
         if (temperature == 0) {
-            throw new ArithmeticException();
+            throw new ArithmeticException("Absolute 0 temperature will invoke div by zero.");
         }
         this.temperature = temperature;
     }

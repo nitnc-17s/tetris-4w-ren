@@ -6,6 +6,7 @@ public class QAgent extends Agent{
     private final double ALPHA;
     private final double GAMMA;
     private final double EPSILON;
+
     public QAgent(int nextSize, double alpha, double gamma, double epsilon) {
         this(nextSize, alpha, gamma, epsilon, new Random().nextLong());
     }
@@ -91,6 +92,5 @@ public class QAgent extends Agent{
         System.out.println(sumRen / cycle);
         //System.out.println(Arrays.toString(qTable));
     }
-
 }
 

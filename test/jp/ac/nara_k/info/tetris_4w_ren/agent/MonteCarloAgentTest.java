@@ -7,7 +7,6 @@ import java.util.ArrayList;
 public class MonteCarloAgentTest {
     ArrayList<Integer> ranRen = new ArrayList<>();
     ArrayList<Integer> aftRen = new ArrayList<>();
-
     @Test
     public void run() {
         MonteCarloAgent agent = new MonteCarloAgent(3);

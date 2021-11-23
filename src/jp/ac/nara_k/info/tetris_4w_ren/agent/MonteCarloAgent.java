@@ -5,9 +5,6 @@ import java.util.ArrayList;
 import  java.lang.Integer;
 
 public class MonteCarloAgent extends Agent{
-    ArrayList<Integer> actions = new ArrayList<>();
-    ArrayList<Integer> states = new ArrayList<>();
-    int episodeCount;
     ArrayList<Integer> ren = new ArrayList<>();
 
     public ArrayList<Integer> getRen() {
@@ -20,77 +17,61 @@ public class MonteCarloAgent extends Agent{
 
     public MonteCarloAgent(int nextSize) {
         super(nextSize);
-        episodeCount = 0;
     }
 
     public MonteCarloAgent(int nextSize, long seed) {
         super(nextSize, seed);
-        episodeCount = 0;
-    }
-
-    @Override
-    int selectAction(int state){
-        int N = qTable[state].length;
-        int act = this.randomGenerator.nextInt(N);
-        actions.add(act);
-        states.add(state);
-        return act;
     }
 
     @Override
     public int run() {
-        while (!environment.isFinalState()) {
-            int act = selectAction(getState());
-            environment.action(act);
-            this.episodeCount++;
-        }
+        int ren = -1;
 
-        int ren = episodeCount;
-        this.episodeCount = 0;
+        while (!environment.isFinalState()) {
+            int state = getState();
+            int act = selectAction(state);
+            environment.action(act);
+            ren++;
+        }
 
         return ren;
     }
 
     @Override
     public void doCycle() {
+        ArrayList<Integer> actions = new ArrayList<>();
+        ArrayList<Integer> states = new ArrayList<>();
+        int episodeCount = 0;
+
         while (!environment.isFinalState()) {
-            int act = selectAction(getState());
+            int state = getState();
+            int act = selectRandomAction(state);
+
+            states.add(state);
+            actions.add(act);
+
             environment.action(act);
-            this.episodeCount++;
+            episodeCount++;
         }
 
-        int N =episodeCount;
-
-        for (int i = 0; i < N; i++) {
-            if (N - i < 3) {
+        for (int i = 0; i < episodeCount; i++) {
+            if (episodeCount - i < 3) {
                 this.qTable[states.get(i)][actions.get(i)] -= 2;
             }else {
                 this.qTable[states.get(i)][actions.get(i)] += 1;
             }
-            ren.add(N);
-            this.episodeCount = 0;
-
+            ren.add(episodeCount);
         }
     }
 
-    public void doCycleRand() {
-        while (!environment.isFinalState()) {
-            int act = selectAction(getState());
-            environment.action(act);
-            this.episodeCount++;
-        }
+
+    int selectRandomAction(int state){
+        int N = qTable[state].length;
+        return this.randomGenerator.nextInt(N);
     }
 
-    public void doCycleTest(){
-        while (!environment.isFinalState()) {
-            int act = selectActionTest(getState());
-            environment.action(act);
-            this.episodeCount++;
-        }
-
-    }
-
-    public int selectActionTest(int state){
+    @Override
+    public int selectAction(int state){
         int N = qTable[state].length;
         int act=0;
         for (int i = 0; i < N; i++) {

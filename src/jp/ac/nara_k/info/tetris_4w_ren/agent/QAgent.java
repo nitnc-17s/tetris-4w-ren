@@ -1,18 +1,20 @@
 package jp.ac.nara_k.info.tetris_4w_ren.agent;
 import jp.ac.nara_k.info.tetris_4w_ren.environment.Environment;
 
-import java.util.Arrays;
 import java.util.Random;
 public class QAgent extends Agent{
-    private final double ALPHA = 0.2;
-    private final double GAMMA = 0.99;
-    private final double EPSILON = 0.5;
-    public QAgent(int nextSize) {
-        this(nextSize, new Random().nextLong());
+    private final double ALPHA;
+    private final double GAMMA;
+    private final double EPSILON;
+    public QAgent(int nextSize, double alpha, double gamma, double epsilon) {
+        this(nextSize, alpha, gamma, epsilon, new Random().nextLong());
     }
 
-    public QAgent(int nextSize, long seed) {
+    public QAgent(int nextSize, double alpha, double gamma, double epsilon, long seed) {
         super(nextSize, seed);
+        this.ALPHA = alpha;
+        this.GAMMA = gamma;
+        this.EPSILON = epsilon;
     }
 
     @Override

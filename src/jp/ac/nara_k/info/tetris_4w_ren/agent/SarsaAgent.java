@@ -84,6 +84,7 @@ public class SarsaAgent extends Agent {
 
         for (int i=0; i<qTable[state].length; i++) {
             if (qTable[state][i] > maxR) {
+                maxR = qTable[state][i];
                 action = i;
             }
         }

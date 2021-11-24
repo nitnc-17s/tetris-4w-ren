@@ -56,7 +56,7 @@ public class QAgent extends Agent{
     }
 
     private double getMax(double[] arr){
-        double max = 0;
+        double max = - Double.MAX_VALUE;
         for(int i = 0; i < arr.length; i++){
             if(max < arr[i]){
                 max = arr[i];
@@ -78,9 +78,10 @@ public class QAgent extends Agent{
                 maxCount++;
             }
         }
-        if(maxCount > 1){
-            return rand.nextInt(table.length);
-        }
+        // ゴメンこのアルゴリズムはバグる
+        // if(maxCount > 1){
+        //     return rand.nextInt(table.length);
+        // }
         return maxIndex;
     }
 

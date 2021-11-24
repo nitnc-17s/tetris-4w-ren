@@ -60,7 +60,6 @@ public class MonteCarloAgent extends Agent{
             }else {
                 this.qTable[states.get(i)][actions.get(i)] += 1;
             }
-            ren.add(episodeCount);
         }
     }
 

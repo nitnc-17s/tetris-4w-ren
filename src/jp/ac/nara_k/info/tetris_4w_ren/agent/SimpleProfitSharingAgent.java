@@ -56,7 +56,7 @@ public class SimpleProfitSharingAgent extends Agent {
     }
 
     @Override
-    public void run() {
+    public int run() {
         double tmpTemperature = getTemperature();
         setTemperature(5e-3);
         double tmpEpsilon = getEpsilon();
@@ -64,18 +64,18 @@ public class SimpleProfitSharingAgent extends Agent {
 
         int ren = -1;
         while (!environment.isFinalState()) {
-            System.err.println(environment);
+            // System.err.println(environment);
             ren++;
             int state = getState();
             int action = selectAction(state);
             environment.action(action);
         }
-        System.err.println(environment);
-        System.err.printf("REN: %d\n", ren);
         renResults.add(ren);
 
         setEpsilon(tmpEpsilon);
         setTemperature(tmpTemperature);
+
+        return ren;
     }
 
     public void setCBid(double cBid) {

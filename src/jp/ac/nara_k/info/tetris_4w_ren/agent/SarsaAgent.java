@@ -19,15 +19,13 @@ public class SarsaAgent extends Agent {
     }
 
     @Override
-    public void run() {
+    public int run() {
         int ren = 0;
 
         int s = getState();
         int a = greedySelectAction(s);
 
         while (!environment.isFinalState()) {
-            System.err.println(environment.getBlockState().toBlockAscii());
-
             environment.action(a);
 
             if (environment.isFinalState()) {
@@ -40,7 +38,7 @@ public class SarsaAgent extends Agent {
             ren++;
         }
 
-        System.out.println("REN: " + ren);
+        return ren;
     }
 
     @Override
@@ -86,6 +84,7 @@ public class SarsaAgent extends Agent {
 
         for (int i=0; i<qTable[state].length; i++) {
             if (qTable[state][i] > maxR) {
+                maxR = qTable[state][i];
                 action = i;
             }
         }

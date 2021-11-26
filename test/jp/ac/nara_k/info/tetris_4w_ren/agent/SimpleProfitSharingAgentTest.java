@@ -21,7 +21,7 @@ class SimpleProfitSharingAgentTest {
         agent.setCBid(0.01);
         agent.setTemperature(1);
         agent.setRulesEffectLength(3);
-        agent.learn(1_000_000);
+        agent.learn(10_000, 100, 1);
 
         // final learning result
         agent.setCBid(0);

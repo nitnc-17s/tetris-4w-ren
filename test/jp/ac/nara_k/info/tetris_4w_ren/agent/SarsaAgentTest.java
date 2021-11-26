@@ -12,7 +12,6 @@ public class SarsaAgentTest {
     @Test
     public void learn() {
         Agent agent = new SarsaAgent(2, 0.8, 0.2, 1e-4, 0xf948b319a72a4ae8L);
-        agent.learn(1000000);
-        agent.run();
+        agent.learn(10000, 100, 1);
     }
 }

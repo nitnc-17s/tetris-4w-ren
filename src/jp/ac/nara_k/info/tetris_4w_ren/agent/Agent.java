@@ -32,15 +32,34 @@ public abstract class Agent {
         return environment.state();
     }
 
-    public void run() {
+    public int run() {
         doCycle();
-        System.out.println(environment);
+        return -1;
     }
 
-    public void learn(long maxCycle) {
-        for (long cycle = 1; cycle <= maxCycle; cycle++) {
-            doCycle();
+    public void learn(long printCycle, long printTimes, int sampleTimes) {
+        int sum = 0;
+        for (int i = 0; i < sampleTimes; i++) {
+            sum += run();
             initEnvironment();
+        }
+        double avg = (double) sum / sampleTimes;
+        System.out.println("index\tREN");
+        System.out.println("0\t" + avg);
+
+        for (long count = 1; count <= printTimes; count++) {
+            for (long cycle = 1; cycle <= printCycle; cycle++) {
+                doCycle();
+                initEnvironment();
+            }
+
+            sum = 0;
+            for (int i = 0; i < sampleTimes; i++) {
+                sum += run();
+                initEnvironment();
+            }
+            avg = (double) sum / sampleTimes;
+            System.out.println(count * printCycle + "\t" + avg);
         }
     }
 

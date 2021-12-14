@@ -49,14 +49,11 @@ public class SarsaAgent extends Agent {
         while (!environment.isFinalState()) {
             double r = environment.action(a);
 
-            if (environment.isFinalState()) {
-                break;
-            }
-
             int nextS = getState();
             int nextA = selectAction(nextS);
+            double q = (nextA != -1) ? qTable[nextS][nextA] : 0;
 
-            qTable[s][a] = qTable[s][a] + learningRate * (r + discountFactor * qTable[nextS][nextA] - qTable[s][a]);
+            qTable[s][a] = qTable[s][a] + learningRate * (r + discountFactor * q - qTable[s][a]);
 
             s = nextS;
             a = nextA;
@@ -72,7 +69,8 @@ public class SarsaAgent extends Agent {
         if (rand > epsilon) { // greedy
             action = greedySelectAction(state);
         } else { // random
-            action = randomGenerator.nextInt(qTable[state].length);
+            int length = qTable[state].length;
+            action = (length > 0) ? randomGenerator.nextInt(length) : -1;
         }
 
         return action;

@@ -56,6 +56,10 @@ public class QAgent extends Agent{
     }
 
     private double getMax(double[] arr){
+        if (arr.length == 0) {
+            return 0;
+        }
+
         double max = - Double.MAX_VALUE;
         for(int i = 0; i < arr.length; i++){
             if(max < arr[i]){

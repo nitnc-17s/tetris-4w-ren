@@ -64,7 +64,7 @@ public class Environment {
         Tetrimino mino = minoHolder.consume(useCurrent);
         blockState = nextBlockStateList.get(actionIndex);
         updateNextStates();
-        return isFinalState() ? -50 : 1;
+        return isFinalState() ? TERMINAL_PENALTY : 1;
     }
 
     public int actionSize() {
